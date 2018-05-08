@@ -87,7 +87,7 @@ toList { list } =
 -}
 fromList : List a -> Set a
 fromList xs =
-    List.foldl insert empty xs
+    List.foldr insert empty xs
 
 
 {-| Fold over the values in a set, in order from lowest to highest.
@@ -120,17 +120,13 @@ filter p { list } =
 
 cartesianProduct : List x -> List y -> List ( x, y )
 cartesianProduct xs ys =
-    let
-        withYs x =
-            List.map (\y -> ( x, y )) ys
-    in
-        List.map withYs xs |> List.concat
+    List.concatMap (\x -> List.map (\y -> ( x, y )) ys) xs
 
 
 product : Set x -> Set y -> Set ( x, y )
 product xs ys =
     cartesianProduct (toList xs) (toList ys)
-        |> fromList
+        |> \list -> { list = list }
 
 
 {-| Create two new sets; the first consisting of elements which satisfy a

@@ -64,7 +64,7 @@ view model =
                 , value model.uiState.enrollmentCourseIdField
                 ]
                 []
-            , dataTable [ "StudentId", "CourseId" ] (Set.toList <| Essential.enrollmentView model.essential) enrollmentRow
+            , dataTable [ "Student", "Course" ] (Set.toList <| Essential.enrollmentView model.essential) enrollmentRow
             ]
         ]
 
